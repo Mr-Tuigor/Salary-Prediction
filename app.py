@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+from job_titles import JOB_TITLE_OPTIONS # Import the job titles
 
 # Load the best model and column order
 best_model = joblib.load('best_salary_prediction_model.pkl')
@@ -18,23 +19,8 @@ years_of_experience = st.slider('Years of Experience', 0.0, 40.0, 5.0)
 gender = st.selectbox('Gender', ['Male', 'Female', 'Other'])
 education_level = st.selectbox('Education Level', ['Bachelor\'s Degree', 'Master\'s Degree', 'PhD', 'High School'])
 
-# For Job Title, we will create a selectbox with a few common titles.
-# In a real application, you would populate this with all unique job titles from your training data.
-job_title_options = [
-    'Software Engineer',
-    'Data Scientist',
-    'Project Manager',
-    'Marketing Analyst',
-    'HR Manager',
-    'Sales Representative',
-    'Accountant',
-    'Financial Analyst',
-    'UX Designer',
-    'Operations Manager',
-    'IT Support Specialist',
-    'Teacher'
-]
-job_title = st.selectbox('Job Title', job_title_options)
+# Use the imported job titles
+job_title = st.selectbox('Job Title', JOB_TITLE_OPTIONS)
 
 if st.button('Predict Salary'):
     # Create a DataFrame for the new input data
